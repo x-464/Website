@@ -1,140 +1,94 @@
-import * as THREE from 'three';
-import { WebGLRenderer } from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+// For hover effect of the sidebar --------------------------------------------------
 
-//renderer
-const renderer = new WebGLRenderer();
+// get all sidebar items
+const sidebarItems = document.querySelectorAll('.sidebarItemsClass');
 
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-THREE.ColorManagement.legacyMode = false;
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x000000);
-renderer.setPixelRatio(window.devicePixelRatio);
+sidebarItems.forEach(item => {
+    item.addEventListener('mouseenter', () => { // checks for hover
+        // hides all other items
+        sidebarItems.forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.style.opacity = '0.1';
+            }
+        });
+        // increase font size of hovered item
+        item.style.fontSize = '3rem';
+    });
 
-document.body.appendChild(renderer.domElement);
+    item.addEventListener('mouseleave', () => { // checks for not hovering
+        // shows all items when unhovered
+        sidebarItems.forEach(otherItem => {
+            otherItem.style.opacity = '1';
+        });
+        // resets font size of hovered item when unhovered
+        item.style.fontSize = '';
+    });
+});
 
-//scene
-const scene = new THREE.Scene();
+// For moving the sidebar ------------------------------------------------------------
 
-//camera
-const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
-camera.position.set(7, 10, 5);
+let sidebarVisible = true; // Track the visibility state
 
-//orbit controls
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.minDistance = 1;
-controls.maxDistance = 15;
-controls.maxPolarAngle = 1.5;
-controls.minPolarAngle = 1;
-controls.zoomSpeed = 3;
-controls.target.set(0, 1.55, 0);
-controls.update();
-
-//raycaster
-const raycaster = new THREE.Raycaster();
-
-document.addEventListener('mousedown', onMouseDown);
-
-//finding where the raycaster intersected
-function onMouseDown(event) {
-  const coords = new THREE.Vector2(
-    (event.clientX / renderer.domElement.clientWidth) * 2 - 1,
-    -((event.clientY / renderer.domElement.clientHeight) * 2 - 1)
-  );
-
-  raycaster.setFromCamera(coords, camera);
-
-  const intersections = raycaster.intersectObjects(scene.children, true);
-  const selectedObject = intersections[0].object;
-
-  if (selectedObject.name === 'About_Me_Shortcut') 
-  {
-    console.log('About Me Shortcut clicked');
-  } 
-  else if (selectedObject.name === 'About_Me_Notepad_Close') 
-  {
-    console.log('About Me Notepad Close clicked');
-  }
-}
-
-//Load model
-const loader = new GLTFLoader();
-loader.load('PortfolioDesk.glb', function(gltf) 
-{
-  console.log('loading model');
-  const object = gltf.scene;
-  object.traverse((child) => 
-  {
-    if (child.isMesh) 
-    {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
+document.getElementById("arrowForSidebar").addEventListener("click", function() {
+    const mainContent = document.querySelector('.mainContent');
+    const sidebar = document.querySelector('#sidebar');
+    sidebarVisible = !sidebarVisible; // Toggle visibility state
     
-  });
+    // Toggle classes based on the visibility state
+    if (sidebarVisible) {
+        sidebar.classList.remove('hidden'); // Show the sidebar
+        mainContent.classList.remove('centerProperly');
+        this.style.transform = 'rotate(135deg)'; // Reset arrow
+        this.classList.remove('arrow-moved'); // Move arrow back
+        this.style.borderColor = '#0c0c0c'; // Reset arrow color
+    } else {
+        sidebar.classList.add('hidden'); // Hide the sidebar
+        mainContent.classList.add('centerProperly');
+        this.style.transform = 'rotate(-45deg)'; // Rotate arrow
+        this.classList.add('arrow-moved'); // Move arrow left
+        this.style.borderColor = '#e9e9e9'; // Change arrow color
+    }
+});
 
-  object.position.set(0, 0, 0);
-  scene.add(object);
-  document.getElementById('progress-container').style.display = 'none';
-}, 
 
-//Tells me how quick it loaded the GLTF
-function(xhr) 
-{
-  console.log(`loading ${xhr.loaded / xhr.total * 100}%`);
-}, 
-function(error) 
-{
-  console.error(error);
+
+const TextArray = ["STUDENT", "GRAPHIC DESIGNER", "3D MODELER", "EDITOR", "PROBLEM SOLVER", "UI/UX DESIGNER", "PROGRAMMER"];
+let currentTextIndex = 0;
+
+function cycleText() {
+    const titleElements = document.querySelectorAll('.itemsInWhatIAm');
+
+    titleElements.forEach((titleElement, index) => {
+        titleElement.textContent = ""; 
+        if (index === 3) {
+            titleElement.textContent = TextArray[currentTextIndex];
+            titleElement.style.filter = "none";
+        } else if (index === 1) {
+            titleElement.textContent = TextArray[(currentTextIndex - 2 + TextArray.length) % TextArray.length];
+            titleElement.style.filter = "blur(0.2rem)";
+        } else if (index === 2) {
+            titleElement.textContent = TextArray[(currentTextIndex - 1 + TextArray.length) % TextArray.length];
+            titleElement.style.filter = "blur(0.1rem)";
+        } else if (index === 4) {
+            titleElement.textContent = TextArray[(currentTextIndex + 1 + TextArray.length) % TextArray.length];
+            titleElement.style.filter = "blur(0.1rem)";
+        } else if (index === 5) {
+            titleElement.textContent = TextArray[(currentTextIndex + 2 + TextArray.length) % TextArray.length];
+            titleElement.style.filter = "blur(0.2rem)";
+        } else if (index === 6) {
+            titleElement.textContent = TextArray[(currentTextIndex + 3 + TextArray.length) % TextArray.length];
+            titleElement.style.filter = "blur(0.2rem)";
+        } else {
+            titleElement.textContent = TextArray[(currentTextIndex - 3) % TextArray.length];
+            titleElement.style.filter = "blur(0.4rem)";
+        }
+    });
+    currentTextIndex = (currentTextIndex + 1) % TextArray.length;
 }
-);
 
-//Add spotlight
-const spotLight = new THREE.SpotLight(0xf5e7d5);
-spotLight.position.set(0, 4.5, 0);
-spotLight.castShadow = true;
-const target = new THREE.Object3D();
-target.position.set(0, 0, 0);
-scene.add(target);
-spotLight.target = target;
-spotLight.intensity = 50;
-spotLight.angle = 0.7;
-spotLight.penumbra = 0.1;
-spotLight.decay = 4;
-spotLight.distance = 20;
-scene.add(spotLight);
+setInterval(cycleText, 500);
 
-//Add ambient spotlight
-const ambiencespotLight = new THREE.SpotLight(0xf5e7d5);
-ambiencespotLight.position.set(-0.1, 10, 0);
-ambiencespotLight.castShadow = true;
-const ambiencetarget = new THREE.Object3D();
-ambiencetarget.position.set(0, 0, 0);
-scene.add(ambiencetarget);
-ambiencespotLight.target = ambiencetarget;
-ambiencespotLight.intensity = 15;
-ambiencespotLight.angle = 1;
-ambiencespotLight.penumbra = 0.1;
-ambiencespotLight.decay = 1;
-ambiencespotLight.distance = 20;
-scene.add(ambiencespotLight);
-
-//Animate loop
-function animate() {
-  controls.update();
-  renderer.render(scene, camera);
-  requestAnimationFrame(animate);
-}
-animate();
-
-//Handle window resize
-function onWindowResize() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-window.addEventListener('resize', onWindowResize);
+// function cycleImages(){
+//     const imageElements = document.querySelectorAll('.teapotImg');
+    
+// }

@@ -1,21 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="main.js"></script>
+    <title>Felix's Portfolio</title>
 </head>
 <body>
-  <div id="progress-container" style="display: none;">Loading...</div>
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "./node_modules/three/build/three.module.js",
-      "three/addons/": "./node_modules/three/examples/jsm/"
-    }
-  }
-  </script>
-  <script type="module" src="main.js"></script>
+    <div id="sidebar">
+        <span id="arrowForSidebar"></span>
+        <nav id="sidebarNav">
+            <a href="#aboutme" id="1" class="sidebarItemsClass">About me</a>
+            <a href="#education" id="2" class="sidebarItemsClass">Education</a>
+            <a href="#projects" id="3" class="sidebarItemsClass">Projects</a>
+            <a href="#contactMe" id="4" class="sidebarItemsClass">Contact me</a>
+            <!-- <a href="CV/Felix Hornby's CV.pdf" download id="CV">Want my CV?</a> -->
+        </nav>
+    </div>
+
+    <div class="mainContent">
+        <div class="first">
+            <h1 id="myName">Hey! I'm Felix.</h1>
+            <h2 id="iAm">I'm a &nbsp;</h2>
+            <div id="whatIAm">  
+                <div id="Stu"  class="itemsInWhatIAm">STUDENT</div>
+                <div id="GD" class="itemsInWhatIAm">GRAPHIC DESIGNER</div>
+                <div id="3DM" class="itemsInWhatIAm">3D MODELER</div>
+                <div id="EDITOR" class="itemsInWhatIAm">EDITOR</div>
+                <div id="PS" class="itemsInWhatIAm">PROBLEM SOLVER</div>
+                <div id="UID" class="itemsInWhatIAm">UI/UX DESIGNER</div>
+                <div id="Prog" class="itemsInWhatIAm">PROGRAMMER</div>
+            </div>
+        </div>
+        
+        <div id="aboutme" class="aboutme">
+            <h2 id="aboutMeTitle" class="MainContent">About Me</h2>
+            <p id="AboutMeText">
+                I'm Felix, a 17-year-old with a passion for computers. Ever since I started learning C++ 7 years ago, 
+                I've been improving my skills in a range of languages. What I love most about coding, is getting something working from designing intuitive user 
+                interfaces to  the backend of a login screen to building efficient algorithms that keep everything running smoothly.<br><br>
+                Right now, I'm completing a T Level in Digital Production, Design & Development at Bournemouth & Poole College. 
+                Here, I'm learning more about programming, web development,  data management, cybersecurity, and exploring the legal and ethical side of computing. 
+                I'm working hard to build a future in software development, web development, or cybersecurity, but I'm always open to learning something 
+                new!<br><br>
+                Beyond programming, I enjoy snowboarding, climbing, and biking! I'm also love camera work, video editing, and 3D modeling.
+            </p>
+        </div>
+        
+        <div class="education" id="education">
+            <h1 id="educationTitle" class="MainContent">Education</h1>
+            <div id="educationText">
+
+                <h2 class="educationTitles">Short Course in Digital Filmmaking at Arts University Bournemouth</h2>
+                <p id="cAubText" class="QualText">
+                    This course allowed me to explore the fundamentals of digital filmmaking, from pre-production through post-production, 
+                    increasing my understanding of visual storytelling and media creation.
+                </p>
+
+                <h2 class="educationTitles"><br>My GCSEs</h2>
+                <div id="GCSEsList">English - Grade 7<br>Computer Science - Grade 6<br>Maths - Grade 5</div>
+
+                <h2 class="educationTitles"><br>Level 2 Media Production & Technologies at Bournemouth & Poole College</h2>
+                <div id="L2MGrade">Grade: Distinction</div>
+                <p id="L2MText" class="QualText">
+                This qualification provided me with skills in media production, including video/image editing using the Adobe Suite, 
+                camera work using the Canon XA75, and an understanding of media technologies.</p>
+
+                <h2 class="educationTitles"><br>T Level in Digital Production, Design & Development at Bournemouth & Poole College</h2>
+                <p id="DPDD" class="QualText">
+                    I am currently studying to further my skills in programming and software development, as well as explore cybersecurity, 
+                    data analysis, legal and ethical responsibilities, and professional responsibilities. This course combines both theoretical and 
+                    practical elements, preparing me for a career in anything digital.
+                </p>
+
+            </div>
+        </div>
+        
+        <div class="projects" id="projects">
+            <h1 id="projectsTitle">My Projects</h1>
+            <h2 id="modelOpenerTitle"><br>Model Opener for .obj Files</h2>
+           
+            <p class="projText">This project has been in the making for about 6 months now, I've learnt to use OpenGL using C++ from the ground-up,
+                making shaders, realistic lighting and shadows. It also features .obj file reading so you can import any file with the 
+                .obj file extension.
+            </p>
+            <br>
+            <div id="modelOpenerImages">
+                <span id="arrowForCarouselLeft"></span>
+                <img src="images/Project IMGs/ModelOpener/TeacupFullScreen.png" alt="This image shows a teacup being rendered using OpenGL with realistic lighting and shadows" id="image1" class="teapotImg">
+                <img src="images/Project IMGs/ModelOpener/TeacupFullScreen.png" alt="This image shows a teacup being rendered using OpenGL with realistic lighting and shadows" id="image2" class="teapotImg">
+                <img src="images/Project IMGs/ModelOpener/TeacupFullScreen.png" alt="This image shows a teacup being rendered using OpenGL with realistic lighting and shadows" id="image3" class="teapotImg">
+                <span id="arrowForCarouselRight"></span>
+            </div>
+        </div>
+        <p id="construction">Still under construction, come back soon!</p>
+        <div id="contactMe" class="contactMe">
+            <h1 id="contactTitle">Contact Me</h1>
+            <p id="contactText">Still under construction, come back soon!</p>
+        </div>
+        
+    </div>
 </body>
 </html>
