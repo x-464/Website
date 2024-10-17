@@ -1,94 +1,182 @@
-// For hover effect of the sidebar --------------------------------------------------
 
-// get all sidebar items
+// For hover effect of the sidebar ----------------------------------------------------
+
 const sidebarItems = document.querySelectorAll('.sidebarItemsClass');
 
 sidebarItems.forEach(item => {
-    item.addEventListener('mouseenter', () => { // checks for hover
+    item.addEventListener('mouseenter', () => {
         // hides all other items
         sidebarItems.forEach(otherItem => {
             if (otherItem !== item) {
                 otherItem.style.opacity = '0.1';
             }
         });
-        // increase font size of hovered item
+        //increase font size of hovered item
         item.style.fontSize = '3rem';
     });
 
-    item.addEventListener('mouseleave', () => { // checks for not hovering
-        // shows all items when unhovered
+    item.addEventListener('mouseleave', () => {
+        //shows all items when unhovered
         sidebarItems.forEach(otherItem => {
             otherItem.style.opacity = '1';
         });
-        // resets font size of hovered item when unhovered
         item.style.fontSize = '';
     });
 });
 
+
 // For moving the sidebar ------------------------------------------------------------
 
-let sidebarVisible = true; // Track the visibility state
+let sidebarVisible = true;
 
 document.getElementById("arrowForSidebar").addEventListener("click", function() {
     const mainContent = document.querySelector('.mainContent');
     const sidebar = document.querySelector('#sidebar');
-    sidebarVisible = !sidebarVisible; // Toggle visibility state
+    sidebarVisible = !sidebarVisible;
     
-    // Toggle classes based on the visibility state
     if (sidebarVisible) {
-        sidebar.classList.remove('hidden'); // Show the sidebar
+        //unhide sidebar
+        sidebar.classList.remove('hidden');
         mainContent.classList.remove('centerProperly');
-        this.style.transform = 'rotate(135deg)'; // Reset arrow
-        this.classList.remove('arrow-moved'); // Move arrow back
-        this.style.borderColor = '#0c0c0c'; // Reset arrow color
+        this.style.transform = 'rotate(135deg)';
+        this.classList.remove('arrow-moved');
+        this.style.borderColor = '#0c0c0c';
     } else {
-        sidebar.classList.add('hidden'); // Hide the sidebar
+        //hide sidebar
+        sidebar.classList.add('hidden');
         mainContent.classList.add('centerProperly');
-        this.style.transform = 'rotate(-45deg)'; // Rotate arrow
-        this.classList.add('arrow-moved'); // Move arrow left
-        this.style.borderColor = '#e9e9e9'; // Change arrow color
+        this.style.transform = 'rotate(-45deg)';
+        this.classList.add('arrow-moved');
+        this.style.borderColor = '#e9e9e9';
     }
 });
 
 
+// Changing text at the top ----------------------------------------------------------------------------------------------------
 
 const TextArray = ["STUDENT", "GRAPHIC DESIGNER", "3D MODELER", "EDITOR", "PROBLEM SOLVER", "UI/UX DESIGNER", "PROGRAMMER"];
 let currentTextIndex = 0;
 
 function cycleText() {
-    const titleElements = document.querySelectorAll('.itemsInWhatIAm');
-
-    titleElements.forEach((titleElement, index) => {
-        titleElement.textContent = ""; 
-        if (index === 3) {
-            titleElement.textContent = TextArray[currentTextIndex];
-            titleElement.style.filter = "none";
-        } else if (index === 1) {
-            titleElement.textContent = TextArray[(currentTextIndex - 2 + TextArray.length) % TextArray.length];
-            titleElement.style.filter = "blur(0.2rem)";
-        } else if (index === 2) {
-            titleElement.textContent = TextArray[(currentTextIndex - 1 + TextArray.length) % TextArray.length];
-            titleElement.style.filter = "blur(0.1rem)";
-        } else if (index === 4) {
-            titleElement.textContent = TextArray[(currentTextIndex + 1 + TextArray.length) % TextArray.length];
-            titleElement.style.filter = "blur(0.1rem)";
-        } else if (index === 5) {
-            titleElement.textContent = TextArray[(currentTextIndex + 2 + TextArray.length) % TextArray.length];
-            titleElement.style.filter = "blur(0.2rem)";
-        } else if (index === 6) {
-            titleElement.textContent = TextArray[(currentTextIndex + 3 + TextArray.length) % TextArray.length];
-            titleElement.style.filter = "blur(0.2rem)";
+    const textElements = document.querySelectorAll('.itemsInWhatIAm');
+    const blurLevels = ["0.4rem", "0.2rem", "0.1rem", "none", "0.1rem", "0.2rem", "0.4rem"];
+    
+    textElements.forEach((textElement, index) => {
+        const textIndex = (currentTextIndex + index) % TextArray.length;
+        textElement.textContent = TextArray[textIndex];
+        
+        if (blurLevels[index] === "none") {
+            textElement.style.filter = "none";
         } else {
-            titleElement.textContent = TextArray[(currentTextIndex - 3) % TextArray.length];
-            titleElement.style.filter = "blur(0.4rem)";
+            textElement.style.filter = `blur(${blurLevels[index]})`;
         }
     });
+
     currentTextIndex = (currentTextIndex + 1) % TextArray.length;
 }
 
-setInterval(cycleText, 500);
+setInterval(cycleText, 1000);
 
-// function cycleImages(){
-//     const imageElements = document.querySelectorAll('.teapotImg');
-    
+
+// LEFT ARROW ------------------------------------------------------------------------
+
+const leftArrowChecker = document.getElementById('arrowForCarouselLeft');
+
+leftArrowChecker.addEventListener('mouseenter', function() {
+    leftArrowChecker.style.width = '43px';
+    leftArrowChecker.style.height = '43px';
+})
+
+leftArrowChecker.addEventListener('mouseleave', function() {
+    setTimeout( function() {
+        leftArrowChecker.style.width = '50px';
+        leftArrowChecker.style.height = '50px';   
+    }, 150)
+});
+
+leftArrowChecker.addEventListener('mousedown', function() {
+    leftArrowChecker.style.width = '35px';
+    leftArrowChecker.style.height = '35px';
+})
+
+leftArrowChecker.addEventListener('mouseup', function() {
+    setTimeout( function() {
+        leftArrowChecker.style.width = '43px';
+        leftArrowChecker.style.height = '43px';
+    }, 150)
+})
+
+const imageElements = document.getElementById('image2');
+let currentTranslateX = 0;
+
+leftArrowChecker.addEventListener('click', function() {
+    currentTranslateX -= 10;
+    imageElements.style.transform = `translateX(${currentTranslateX}px)`;
+});
+
+// RIGHT ARROW ------------------------------------------------------------------------
+
+const rightArrowChecker = document.getElementById('arrowForCarouselRight');
+
+rightArrowChecker.addEventListener('mouseenter', function() {
+    rightArrowChecker.style.width = '43px';
+    rightArrowChecker.style.height = '43px';
+})
+
+rightArrowChecker.addEventListener('mouseleave', function() {
+    setTimeout( function() {
+        rightArrowChecker.style.width = '50px';
+        rightArrowChecker.style.height = '50px';   
+    }, 150)
+});
+
+rightArrowChecker.addEventListener('mousedown', function() {
+    rightArrowChecker.style.width = '35px';
+    rightArrowChecker.style.height = '35px';
+})
+
+rightArrowChecker.addEventListener('mouseup', function() {
+    setTimeout( function() {
+        rightArrowChecker.style.width = '43px';
+        rightArrowChecker.style.height = '43px';
+    }, 150)
+})
+
+let currentTranslateY = 0;
+
+rightArrowChecker.addEventListener('click', function() {
+    currentTranslateY += 10;
+    imageElements.style.transform = `translateX(${currentTranslateY}px)`;
+});
+
+// 3d parallax (don't delete I may use in future) -------------------------------------------------------------------------
+
+//  Middle picture ----
+
+// const imageElements = document.getElementById('image2');
+
+// imageElements.addEventListener('mousemove', function(event) {
+//     rotateElement(event, imageElements);
+// });
+
+// imageElements.addEventListener('mouseleave', function(element){
+//     imageElements.style.transform = `rotateX(0deg) rotateY(0deg)`;
+// });
+
+// function rotateElement(event, element) {
+//     // Get mouse position
+//     const x = event.clientX;
+//     const y = event.clientY;
+
+//     // Get the element's bounding box
+//     const rect = element.getBoundingClientRect();
+//     const middleX = rect.left + rect.width / 2;
+//     const middleY = rect.top + rect.height / 2;
+
+//     // Calculate offsets relative to the image
+//     const offsetX = ((x - middleX) / (rect.width / 2)) * 15; // Adjust multiplier for less tilt
+//     const offsetY = ((y - middleY) / (rect.height / 2)) * 15; // Adjust multiplier for less tilt
+
+//     // Set rotation
+//     element.style.transform = `rotateX(${offsetY}deg) rotateY(${offsetX}deg)`;
 // }
