@@ -1,4 +1,12 @@
 
+// mobi detection ---------------------------------------------------------------------
+
+if (/Mobi|Android|iPhone|Mobile/i.test(navigator.userAgent)) {
+    console.log('You are on a mobile device!');
+} else {
+    console.log('You are on a desktop device!');
+}
+
 // For hover effect of the sidebar ----------------------------------------------------
 
 const sidebarItems = document.querySelectorAll('.sidebarItemsClass');

@@ -148,6 +148,7 @@ body{
 }
 
 #iAm{
+    margin: 10px 0 0 0;
     font-size: 2.5rem;
     grid-column: 1 / 2;
     grid-row: 2 / 3;
@@ -162,48 +163,6 @@ body{
     grid-column: 2 / 4;
     grid-row: 2;
     align-self: center;
-}
-
-
-@media screen and (max-width: 1260px){
-    #whatIAm{
-        font-size: 3rem;
-    }
-}
-@media screen and (max-width: 1104px){
-    #whatIAm{
-        font-size: 2.5rem;
-    }
-}
-@media screen and (max-width: 966px){
-    #whatIAm{
-        font-size: 2rem;
-    }
-}
-@media screen and (max-width: 830px){
-    #whatIAm{
-        font-size: 1.5rem;
-    }
-}
-@media screen and (max-width: 768px){
-    #whatIAm{
-        font-size: 2.5rem;
-    }
-}
-@media screen and (max-width: 694px){
-    #whatIAm{
-        font-size: 2rem;
-    }
-}
-@media screen and (max-width: 552px){
-    #whatIAm{
-        font-size: 1.5rem;
-    }
-}
-@media screen and (max-width: 414px){
-    #whatIAm{
-        font-size: 1.3rem;
-    }
 }
 
 /* About me section: ------------------------------------- */
@@ -303,7 +262,6 @@ body{
 #modelOpenerTitle{
     margin: 0 auto;
     max-width: 50vw;
-    perspective: 100px;
     text-align: center;
 }
 
@@ -317,7 +275,6 @@ body{
     border-radius: 10px;
 }
 
-
 #image1{
     max-width: 18vw;
     grid-column: 1;
@@ -327,11 +284,6 @@ body{
     opacity: 50%;
     z-index: -1;
     box-shadow: 0px 0px 15px rgba(256, 256, 256, 0.05);
-}
-@media only screen and (max-width: 768px){
-    #image1{
-        max-width: 28vw;
-    }
 }
 
 #image2{
@@ -346,11 +298,6 @@ body{
 #image2:hover{
     transform: scale(1.1);
 }
-@media only screen and (max-width: 768px){
-    #image2{
-        max-width: 35vw;
-    }
-}
 
 #image3{
     max-width: 18vw;
@@ -361,11 +308,6 @@ body{
     opacity: 50%;
     z-index: -1;
     box-shadow: 0px 0px 1rem rgba(256, 256, 256, 0.05);
-}
-@media only screen and (max-width: 768px){
-    #image3{
-        max-width: 28vw;
-    }
 }
 
 #arrowForCarouselLeft {
@@ -381,19 +323,6 @@ body{
     align-self: center;
     transition: width 0.2s ease, height 0.2s ease;
 }
-@media only screen and (max-width: 768px){
-    #arrowForCarouselLeft{
-        width: 25px;
-        height: 25px;
-        border-width: 0 3px 3px 0;
-    }
-}
-@media only screen and (max-width: 440px){
-    #arrowForCarouselLeft{
-        width: 15px;
-        height: 15px;
-    }
-}
 
 #arrowForCarouselRight {
     width: 50px;
@@ -408,19 +337,7 @@ body{
     align-self: center;
     transition: width 0.2s ease, height 0.2s ease;
 }
-@media only screen and (max-width: 768px){
-    #arrowForCarouselRight{
-        width: 25px;
-        height: 25px;
-        border-width: 0 3px 3px 0;
-    }
-}
-@media only screen and (max-width: 440px){
-    #arrowForCarouselRight{
-        width: 15px;
-        height: 15px;
-    }
-}
+
 
 .arrowMovement:hover{
     width: 15px;
@@ -454,19 +371,116 @@ body{
     max-width: 50vw;
 }
 
-@media (max-width: 768px) {
-    #AboutMeText, .QualText, .projText, #contactText {
-        max-width: 85vw;
+
+ /* ALL MEDIA QUERIES -------------------------------------------------- */
+
+/* horrible looking media queries for annoying top part */
+@media screen and (max-width: 1260px){
+    #whatIAm{
+        font-size: 3rem;
+    }
+    #iAm{
+        margin: 11px 0 0 0;
+        font-size: 2.1rem;
     }
 }
 
-@media (max-width: 1200px) {
+@media screen and (max-width: 1104px){
+    #whatIAm{
+        font-size: 2.5rem;
+    }
+    #iAm{
+        margin: 9px 0 0 0;
+        font-size: 1.7rem;
+    }
+}
+
+@media screen and (max-width: 966px){
+    #whatIAm{
+        font-size: 2rem;
+    }
+    #iAm{
+        margin: 4px 0 0;
+    }
+}
+
+@media screen and (max-width: 830px){
+    #whatIAm{
+        font-size: 1.5rem;
+    }
+    #iAm{
+        margin: 0;
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 694px){
+    #whatIAm{
+        font-size: 2rem;
+    }
+    #iAm{
+        margin: 1px 0 0 0;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 552px){
+    #whatIAm{
+        font-size: 1.5rem;
+    }
+    #iAm{
+        margin: 0 0 0 0;
+        font-size: 1.9rem;
+    }
+}
+/* horrible looking media queries end for annoying top part */
+
+
+@media only screen and (max-width: 1200px) {
     .educationTitles {
         max-width: 50vw;
     }
 }
-@media (max-width: 768px) {
-    .educationTitles {
-        max-width: 80vw;
+
+@media only screen and (max-width: 768px) {
+    #AboutMeText, .QualText, .projText, #contactText, .educationTitles {
+        max-width: 85vw;
+    }
+
+    #arrowForCarouselRight{
+        width: 25px;
+        height: 25px;
+        border-width: 0 3px 3px 0;
+    }
+
+    #image2{
+        max-width: 35vw;
+    }
+    #image1, #image3{
+        max-width: 28vw;
+    }
+
+    #whatIAm{
+        font-size: 1.6rem;
+    }
+    #iAm{
+        margin: 0 0 2px 0;
+        font-size: 1.8rem;
+    }
+}
+
+@media only screen and (max-width: 460px){
+    #myName{
+        font-size: 4rem;
+    }
+}
+
+@media only screen and (max-width: 440px){
+    #arrowForCarouselRight{
+        width: 15px;
+        height: 15px;
+    }
+    #whatIAm{
+        font-size: 1.3rem;
     }
 }
