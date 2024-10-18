@@ -123,10 +123,32 @@ body{
 
 #CV{
     position: absolute;
-    margin-top: 94.5vh;
-    font-size: 1.2rem;
+    margin-top: 88vh;
+    font-size: 1.5rem;
     text-decoration: none;
     color: #0c0c0c;
+    transition: font-size 0.5s ease;
+}
+#CV::before{
+    content: "";
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    background: url(images/Icons/documentIcon.png);
+    background-size: contain;
+    transition: width 0.5s ease,  height 0.5s ease;
+}
+
+#CV:hover{
+    font-size: 1.7rem;
+}
+#CV:hover::before{
+    width: 21px;
+    height: 21px;
+}
+
+#documentIcon{
+    position: inherit;
 }
 
 /* Name top thingy: ------------------------------------- */
@@ -366,11 +388,14 @@ body{
     text-align: center;
 }
 
+.icons{
+    width: 1vw;
+}
+
 #contactText{
     margin: 0 auto;
     max-width: 50vw;
 }
-
 
  /* ALL MEDIA QUERIES -------------------------------------------------- */
 
