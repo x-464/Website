@@ -19,7 +19,7 @@ sidebarItems.forEach(item => {
                 otherItem.style.opacity = '0.1';
             }
         });
-        //increase font size of hovered item
+        // increase font size of hovered item
         item.style.fontSize = '3rem';
     });
 
@@ -33,25 +33,50 @@ sidebarItems.forEach(item => {
 });
 
 
+function adjustSidebarPosition() {
+    const sidebar = document.getElementById('sidebar');
+    const windowHeight = window.innerHeight;
+    const margin = 25; // Margin for top, left, and bottom
+
+    // Adjust height to account for top and bottom margins
+    sidebar.style.height = `${windowHeight - (2 * margin)}px`;
+
+    // Set margins for top and left
+    sidebar.style.top = `${margin}px`;
+    sidebar.style.left = `${margin}px`;
+}
+
+// Adjust the sidebar position and height on load and when the window is resized
+window.addEventListener('load', adjustSidebarPosition);
+window.addEventListener('resize', adjustSidebarPosition);
+
+
 // For moving the sidebar ------------------------------------------------------------
 
 let sidebarVisible = true;
+const arrowForSidebarOpen = document.querySelector('#arrowForSidebarOpen');
+const arrowForSidebarClose = document.querySelector('#arrowForSidebarClose');
+arrowForSidebarOpen.classList.add('hidden');
 
-document.getElementById("arrowForSidebar").addEventListener("click", function() {
+
+arrowForSidebarClose.addEventListener("click", function() {
     const mainContent = document.querySelector('.mainContent');
     const sidebar = document.querySelector('#sidebar');
     sidebarVisible = !sidebarVisible;
     
     if (sidebarVisible) {
-        //unhide sidebar
+        //hide sidebar
         sidebar.classList.remove('hidden');
+        arrowForSidebarClose.classList.remove('hidden');
         mainContent.classList.remove('centerProperly');
         this.style.transform = 'rotate(135deg)';
         this.classList.remove('arrow-moved');
         this.style.borderColor = '#0c0c0c';
+        
     } else {
         //hide sidebar
         sidebar.classList.add('hidden');
+        arrowForSidebarOpen.classList.remove('hidden');
         mainContent.classList.add('centerProperly');
         this.style.transform = 'rotate(-45deg)';
         this.classList.add('arrow-moved');
@@ -59,6 +84,22 @@ document.getElementById("arrowForSidebar").addEventListener("click", function() 
     }
 });
 
+arrowForSidebarOpen.addEventListener("click", function() {
+    const mainContent = document.querySelector('.mainContent');
+    const sidebar = document.querySelector('#sidebar');
+    sidebarVisible = !sidebarVisible;
+
+    if (sidebarVisible) {
+        sidebar.classList.remove('hidden');
+        mainContent.classList.remove('centerProperly');
+        arrowForSidebarClose.style.borderColor = '#0c0c0c';
+        arrowForSidebarClose.style.transform = 'rotate(135deg)';
+        arrowForSidebarClose.classList.remove('arrow-moved');
+        setTimeout(function(){
+            arrowForSidebarOpen.classList.add('hidden');
+        }, 100);
+    }
+});
 
 // Changing text at the top ----------------------------------------------------------------------------------------------------
 
