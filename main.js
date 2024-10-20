@@ -1,11 +1,9 @@
 
-// mobi detection ---------------------------------------------------------------------
+// mobi detection (future me is not sure what this is for but don't delete) -----------
 
-if (/Mobi|Android|iPhone|Mobile/i.test(navigator.userAgent)) {
-    console.log('You are on a mobile device!');
-} else {
-    console.log('You are on a desktop device!');
-}
+// if (/Mobi|Android|iPhone|Mobile/i.test(navigator.userAgent)) {
+// } else {
+// }
 
 // For hover effect of the sidebar ----------------------------------------------------
 
@@ -54,50 +52,41 @@ window.addEventListener('resize', adjustSidebarPosition);
 // For moving the sidebar ------------------------------------------------------------
 
 let sidebarVisible = true;
+// gets the arrows and starts the open arrow as hidden
 const arrowForSidebarOpen = document.querySelector('#arrowForSidebarOpen');
 const arrowForSidebarClose = document.querySelector('#arrowForSidebarClose');
 arrowForSidebarOpen.classList.add('hidden');
 
-
 arrowForSidebarClose.addEventListener("click", function() {
-    const mainContent = document.querySelector('.mainContent');
-    const sidebar = document.querySelector('#sidebar');
     sidebarVisible = !sidebarVisible;
+    const sidebar = document.querySelector('#sidebar');
+    const mainContent = document.querySelector('.mainContent');
     
-    if (sidebarVisible) {
-        //hide sidebar
-        sidebar.classList.remove('hidden');
-        arrowForSidebarClose.classList.remove('hidden');
-        mainContent.classList.remove('centerProperly');
-        this.style.transform = 'rotate(135deg)';
-        this.classList.remove('arrow-moved');
-        this.style.borderColor = '#0c0c0c';
-        
-    } else {
+    if (!sidebarVisible) {
         //hide sidebar
         sidebar.classList.add('hidden');
-        arrowForSidebarOpen.classList.remove('hidden');
         mainContent.classList.add('centerProperly');
-        this.style.transform = 'rotate(-45deg)';
-        this.classList.add('arrow-moved');
-        this.style.borderColor = '#e9e9e9';
+        arrowForSidebarOpen.classList.remove('hidden');
+        arrowForSidebarClose.style.borderColor = '#e9e9e9';
+        arrowForSidebarClose.style.transform = 'rotate(-45deg)';
+        console.log('test');
     }
 });
 
 arrowForSidebarOpen.addEventListener("click", function() {
-    const mainContent = document.querySelector('.mainContent');
-    const sidebar = document.querySelector('#sidebar');
     sidebarVisible = !sidebarVisible;
+    const sidebar = document.querySelector('#sidebar');
+    const mainContent = document.querySelector('.mainContent');
 
     if (sidebarVisible) {
+        // unhide sidebar
         sidebar.classList.remove('hidden');
         mainContent.classList.remove('centerProperly');
-        arrowForSidebarClose.style.borderColor = '#0c0c0c';
-        arrowForSidebarClose.style.transform = 'rotate(135deg)';
-        arrowForSidebarClose.classList.remove('arrow-moved');
         setTimeout(function(){
             arrowForSidebarOpen.classList.add('hidden');
-        }, 100);
+            arrowForSidebarClose.style.borderColor = '#0c0c0c';
+            arrowForSidebarClose.style.transform = 'rotate(135deg)';
+        }, 200);
     }
 });
 
@@ -127,7 +116,7 @@ function cycleText() {
 setInterval(cycleText, 1000);
 
 
-// LEFT ARROW ------------------------------------------------------------------------
+// LEFT ARROW FOR CAROUSEL ------------------------------------------------------------------------
 
 const leftArrowChecker = document.getElementById('arrowForCarouselLeft');
 
@@ -163,7 +152,7 @@ leftArrowChecker.addEventListener('click', function() {
     imageElements.style.transform = `translateX(${currentTranslateX}px)`;
 });
 
-// RIGHT ARROW ------------------------------------------------------------------------
+// RIGHT ARROW FOR CAROUSEL ------------------------------------------------------------------------
 
 const rightArrowChecker = document.getElementById('arrowForCarouselRight');
 
@@ -198,7 +187,7 @@ rightArrowChecker.addEventListener('click', function() {
     imageElements.style.transform = `translateX(${currentTranslateY}px)`;
 });
 
-// 3d parallax (don't delete I may use in future) -------------------------------------------------------------------------
+// 3d parallax (don't delete I may use in future) ------------------------------------
 
 //  Middle picture ----
 
