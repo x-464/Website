@@ -304,12 +304,14 @@ body{
 
 #modelOpenerImages{
     display: grid;
+    position: relative;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 0.1fr 1fr 0.1fr;
 }
 
 .teapotImg{
     border-radius: 10px;
+    transition: top 0.7s ease;
 }
 
 #image1{
@@ -320,7 +322,11 @@ body{
     align-self: center;
     opacity: 50%;
     z-index: -1;
-    box-shadow: 0px 0px 15px rgba(256, 256, 256, 0.05);
+   box-shadow: 0px 0px 15px rgba(256, 256, 256, 0.05); 
+   transition: transform 0.7s ease, max-Width 0.7s ease, opacity 0.7s ease;
+}
+#image1:hover{
+    transform: scale(1.1);
 }
 
 #image2{
@@ -330,7 +336,7 @@ body{
     justify-self: center;
     align-self: center;
     box-shadow: 0px 0px 15px rgba(256, 256, 256, 0.3);
-    transition: transform 0.7s ease;
+    transition: transform 0.7s ease, max-Width 0.7s ease, opacity 0.7s ease;
 }
 #image2:hover{
     transform: scale(1.1);
@@ -345,6 +351,10 @@ body{
     opacity: 50%;
     z-index: -1;
     box-shadow: 0px 0px 1rem rgba(256, 256, 256, 0.05);
+    transition: transform 0.7s ease, max-Width 0.7s ease, opacity 0.7s ease;
+}
+#image3:hover{
+    transform: scale(1.1);
 }
 
 #arrowForCarouselLeft {
@@ -374,7 +384,6 @@ body{
     align-self: center;
     transition: width 0.2s ease, height 0.2s ease;
 }
-
 
 .arrowMovement:hover{
     width: 15px;

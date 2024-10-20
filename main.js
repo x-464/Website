@@ -90,6 +90,7 @@ arrowForSidebarOpen.addEventListener("click", function() {
     }
 });
 
+
 // Changing text at the top ----------------------------------------------------------------------------------------------------
 
 const TextArray = ["STUDENT", "GRAPHIC DESIGNER", "3D MODELER", "EDITOR", "PROBLEM SOLVER", "UI/UX DESIGNER", "PROGRAMMER"];
@@ -116,9 +117,54 @@ function cycleText() {
 setInterval(cycleText, 1000);
 
 
-// LEFT ARROW FOR CAROUSEL ------------------------------------------------------------------------
+// Arrows and carousel -----------------------------------------------------------------------------------
 
 const leftArrowChecker = document.getElementById('arrowForCarouselLeft');
+const rightArrowChecker = document.getElementById('arrowForCarouselRight');
+const images = [
+    document.getElementById('image1'),
+    document.getElementById('image2'),
+    document.getElementById('image3')
+];
+
+function animateToNewPositions() {
+    images.forEach((img, index) => {
+        const rect = img.getBoundingClientRect();
+        // img.style.margin = ( something to do with rect in here, using some of the rect )
+    })
+}
+
+// Function to update the grid positions based on image order
+function updateGridPositions() {
+    // First image goes in the first column
+    images[0].style.gridColumn = '1'; 
+    images[0].style.justifySelf = 'end';
+    images[0].style.maxWidth = '18vw';
+    images[0].style.opacity = '50%';
+    images[0].style.boxShadow = '0px 0px 15px rgba(256, 256, 256, 0.1)';
+    images[0].style.zIndex = '-1';
+    // Second image goes in the second column (center)
+    images[1].style.gridColumn = '2';
+    images[1].style.justifySelf = 'center';
+    images[1].style.maxWidth = '25vw';
+    images[1].style.opacity = '100%';
+    images[1].style.boxShadow = '0px 0px 15px rgba(256, 256, 256, 0.3)';
+    images[1].style.zIndex = '0';
+    // Third image goes in the third column
+    images[2].style.gridColumn = '3'; 
+    images[2].style.justifySelf = 'start';
+    images[2].style.maxWidth = '18vw';
+    images[2].style.opacity = '50%';
+    images[2].style.boxShadow = '0px 0px 15px rgba(256, 256, 256, 0.1)';
+    images[2].style.zIndex = '-1';
+}
+
+// Rotate images left
+leftArrowChecker.addEventListener('click', function() {
+    images.push(images.shift());  // Rotate array left
+    updateGridPositions();
+    animateToNewPositions();
+});
 
 leftArrowChecker.addEventListener('mouseenter', function() {
     leftArrowChecker.style.width = '43px';
@@ -144,17 +190,13 @@ leftArrowChecker.addEventListener('mouseup', function() {
     }, 150)
 })
 
-const imageElements = document.getElementById('image2');
-let currentTranslateX = 0;
 
-leftArrowChecker.addEventListener('click', function() {
-    currentTranslateX -= 10;
-    imageElements.style.transform = `translateX(${currentTranslateX}px)`;
+// Rotate images right
+rightArrowChecker.addEventListener('click', function() {
+    images.unshift(images.pop()); // Rotate array right
+    updateGridPositions();
+    animateToNewPositions();
 });
-
-// RIGHT ARROW FOR CAROUSEL ------------------------------------------------------------------------
-
-const rightArrowChecker = document.getElementById('arrowForCarouselRight');
 
 rightArrowChecker.addEventListener('mouseenter', function() {
     rightArrowChecker.style.width = '43px';
@@ -180,12 +222,9 @@ rightArrowChecker.addEventListener('mouseup', function() {
     }, 150)
 })
 
-let currentTranslateY = 0;
+// Initial setup: update grid positions for the first time
+updateGridPositions();
 
-rightArrowChecker.addEventListener('click', function() {
-    currentTranslateY += 10;
-    imageElements.style.transform = `translateX(${currentTranslateY}px)`;
-});
 
 // 3d parallax (don't delete I may use in future) ------------------------------------
 
