@@ -85,7 +85,7 @@ body{
     }
 }
 #sidebar.hidden {
-    transform: translateX(-425px);
+    transform: translateX(-430px);
 }
 
 .sidebarItemsClass{

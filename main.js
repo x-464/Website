@@ -55,7 +55,7 @@ let sidebarVisible = true;
 // gets the arrows and starts the open arrow as hidden
 const arrowForSidebarOpen = document.querySelector('#arrowForSidebarOpen');
 const arrowForSidebarClose = document.querySelector('#arrowForSidebarClose');
-arrowForSidebarOpen.classList.add('hidden');
+// arrowForSidebarOpen.classList.add('hidden');
 
 arrowForSidebarClose.addEventListener("click", function() {
     sidebarVisible = !sidebarVisible;
