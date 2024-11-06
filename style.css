@@ -1,42 +1,38 @@
-@font-face {
+@font-face{
     font-family: 'AfacudFluxLight';
     src: url(fonts/AfacadFlux-Light.ttf) format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-@font-face {
+@font-face{
     font-family: "AfacudFluxRegular";
     src: url(fonts/AfacadFlux-Regular.ttf) format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-@font-face {
+@font-face{
     font-family: "AfacudFluxMedium";
     src: url(fonts/AfacadFlux-Medium.ttf) format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-@font-face {
+@font-face{
     font-family: "LibreBaskerville";
     src: url(fonts/LibreBaskerville-Regular.ttf) format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
-html {
+:root{
+    --mainColour: #0c0c0c;
+    --secondaryColour: #e9e9e9;
+}
+
+html{
     scroll-behavior: smooth;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background-color: #0c0c0c;
-    background: url(images/whitenoise.png), rgb(0, 0, 0);
-    background-size: 300px 300px;
-    animation: 100ms steps(10, end) 0s infinite alternate-reverse none running noise-animation;
-}
-@keyframes noise-animation {
+@keyframes noise-animation{
     0% { background-position: 0% 0%; }
     10% { background-position: -5% -5%; }
     20% { background-position: -10% 5%; }
@@ -48,14 +44,20 @@ body{
     80% { background-position: -5% -5%; }
     90% { background-position: 10% 5%; }
 }
+body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: var(--mainColour);
+}
 
 .mainContent{
     margin-left: 425px;
     font-family: AfacudFluxRegular;
-    color: #e9e9e9;
+    color: var(--secondaryColour);
     transition: margin 1s;
 }
-@media (max-width: 768px) {
+@media (max-width: 768px){
     .mainContent {
         margin-left: 0;
     }
@@ -64,11 +66,26 @@ body{
     margin-left: 0;
 }
 
+#gradient-canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    --gradient-color-1: #900C3F; 
+    --gradient-color-2: #C70039; 
+    --gradient-color-3: #F94C10;  
+    --gradient-color-4: #e79806;
+}
+
+
 /* Side bar: ------------------------------------- */
 
 #sidebar{
-    background-color: #e9e9e9;
-    position: fixed;
+    will-change: transform;
+    background-color: rgba(255, 255, 255, 0.2);
+    position: absolute;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr repeat(2, 0.3fr) 0fr repeat(2, 0.3fr) 1fr;
@@ -76,25 +93,23 @@ body{
     justify-items: center;
     height: 100svh;
     width: 400px;
-    border-radius: 5px;
+    max-width: 86vw;
+    border-radius: 20px;
     transition: transform 1s ease;
+    z-index: 1;
 }
-@media (max-width: 768px) {
-    #sidebar {
-        display: none;
-    }
-}
-#sidebar.hidden {
-    transform: translateX(-430px);
+
+#sidebar.hidden{
+    transform: translateX(-110%);
 }
 
 .sidebarItemsClass{
     grid-column: 1;
     font-family: AfacudFluxLight;
     text-decoration: none;
-    color: #0c0c0c;
+    color: var(--secondaryColour);
     font-size: 2.5rem;
-    transition: font-size 0.6s ease, opacity 0.6s ease;
+    transition: font-size 0.6s ease, opacity 0.8s ease;
 }
 #sidebar1{
     grid-row: 2;
@@ -116,7 +131,7 @@ body{
     margin: 10px;
     font-size: 1.5rem;
     text-decoration: none;
-    color: #0c0c0c;
+    color: var(--secondaryColour);
     font-family: AfacudFluxLight;
     transition: font-size 0.5s ease;
 }
@@ -126,10 +141,10 @@ body{
 
 /* arrows */
 
-#arrowForSidebarClose {
+#arrowForSidebarClose{
     width: 30px;
     height: 30px;
-    border: solid #0c0c0c;
+    border: solid var(--secondaryColour);
     border-width: 0 2.7px 2.7px 0;
     transform: rotate(135deg);
     grid-column: 1;
@@ -137,25 +152,29 @@ body{
     margin-right: 10px;
     justify-self: end;
     cursor: pointer;
-    transition: transform 0.6s, border-color 0.6s, width 0.5s ease, height 0.5s ease;
+    transition: opacity 0.6s, transform 0.6s, border-color 0.6s, width 0.5s ease, height 0.5s ease;
 }
 #arrowForSidebarClose:hover{
     width: 27px;
     height: 27px;
 }
+#arrowForSidebarClose.hidden{
+    opacity: 0%;
+}
 
-#arrowForSidebarOpen {
+
+#arrowForSidebarOpen{
     position: fixed;
     width: 30px;
     height: 30px;
-    border: solid #e9e9e9;
+    border: solid var(--secondaryColour);
     border-width: 0 2.7px 2.7px 0;
     margin-top: 48.3svh;
     margin-left: 2svw;
     transform: rotate(-45deg);
     cursor: pointer;
     /* drop shadow? */
-    transition: opacity 2s, width 0.5s ease, height 0.5s ease;
+    transition: opacity 0.6s, border-color 0.6s, width 0.5s ease, height 0.5s ease;
 }
 #arrowForSidebarOpen:hover{
     width: 27px;
@@ -163,12 +182,11 @@ body{
 }
 #arrowForSidebarOpen.hidden{
     opacity: 0%;
-    z-index: -1;
 }
 
 /* Name top thingy: ------------------------------------- */
 
-.first{
+.top{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr, 0.8fr;
@@ -216,7 +234,7 @@ body{
     padding: 0;
     font-family: AfacudFluxMedium;
     font-size: 4rem;
-    color: #e9e9e9;
+    color: var(--secondaryColour);
     text-align: center;
 }
 
@@ -224,6 +242,56 @@ body{
     font-size: 1.2rem;
     margin: 0 auto;
     max-width: 50vw;
+}
+
+#iCan{
+    margin-top: 5svh;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+/* Marquee */
+
+.marquee {
+    width: 60%;
+    max-width: 1536px;
+    margin-inline: auto;
+    position: relative;
+    height: 100px;
+    overflow: hidden;
+    mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 1) 80%,
+    rgba(0, 0, 0, 0)
+    );
+}
+
+@keyframes scrollLeft {
+    to {
+        left: -200px;
+    }
+}
+.item {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 70px;
+    height: 70px;
+    background-color: rgba(256, 256, 256, 0.2);
+    border-radius: 10px;
+    position: absolute;
+    left: max(calc(100px * 10), 100%);
+    animation-name: scrollLeft;
+    animation-duration: 22s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-delay: calc(22s / 10 * (10 - var(--n)) * -1);
+}
+
+.marqueeItems{
+    height: 70%;
 }
 
 /* Education section: ------------------------------------- */
@@ -239,7 +307,7 @@ body{
     margin-top: 0;
     margin-bottom: 0;
     font-size: 4rem;
-    color: #e9e9e9;
+    color: var(--secondaryColour);
     text-align: center;
 }
 
@@ -287,7 +355,7 @@ body{
     margin-top: 0;
     margin-bottom: 0;
     font-size: 4rem;
-    color: #e9e9e9;
+    color: var(--secondaryColour);
     text-align: center;
 }
 
@@ -322,8 +390,8 @@ body{
     align-self: center;
     opacity: 50%;
     z-index: -1;
-   box-shadow: 0px 0px 15px rgba(256, 256, 256, 0.05); 
-   transition: transform 0.7s ease, max-Width 0.7s ease, opacity 0.7s ease;
+    box-shadow: 0px 0px 15px rgba(256, 256, 256, 0.05); 
+    transition: transform 0.7s ease, max-Width 0.7s ease, opacity 0.7s ease;
 }
 #image1:hover{
     transform: scale(1.1);
@@ -363,7 +431,7 @@ body{
 #arrowForCarouselLeft {
     width: 50px;
     height: 50px;
-    border: solid #e9e9e9;
+    border: solid var(--secondaryColour);
     border-width: 0 2.5px 2.5px 0;
     transform: rotate(135deg);
     cursor: pointer;
@@ -377,7 +445,7 @@ body{
 #arrowForCarouselRight {
     width: 50px;
     height: 50px;
-    border: solid #e9e9e9;
+    border: solid var(--secondaryColour);
     border-width: 0 2.5px 2.5px 0;
     transform: rotate(-45deg);
     cursor: pointer;
@@ -400,6 +468,13 @@ body{
 
 /* Contact Me section: ------------------------------------- */
 
+@media screen and (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+
 #contactMe{
     display: flex;
     flex-direction: column;
@@ -411,120 +486,125 @@ body{
     margin-top: 0;
     margin-bottom: 0;
     font-size: 4rem;
-    color: #e9e9e9;
+    color: var(--secondaryColour);
     text-align: center;
 }
 
-.contactInfoDiv{
-    /* margin: 0 auto; */
-    /* text-align: center; */
+#contactInfoDiv {
+    margin: 1svh auto;
+    text-align: center;
 }
 
 .contactInfo {
-    list-style-type: none;
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: transform 0.5s, color 0.7s;
 }
-
-#myEmail::before{
-    content: "";
-    width: 18px;
-    height: 18px;
-    display: inline-block;
-    background: url(images/Icons/emailIcon.png);
-    background-size: contain;
-    transition: width 0.5s ease,  height 0.5s ease;
-}
-
-#myNumber::before{
-    content: "";
-    width: 18px;
-    height: 18px;
-    display: inline-block;
-    background: url(images/Icons/phoneIcon.png);
-    background-size: contain;
-    transition: width 0.5s ease,  height 0.5s ease;
-}
-
-#contactText{
-    margin: 0 auto;
-    max-width: 50vw;
+.contactInfo:hover{
+    transform: scale(1.2);
+    color: #008cff;
 }
 
  /* ALL MEDIA QUERIES -------------------------------------------------- */
 
-/* horrible looking media queries for annoying top part */
 @media screen and (max-width: 1260px){
     #whatIAm{
         font-size: 3rem;
     }
     #iAm{
-        margin: 11px 0 0 0;
+        margin: 11px 0 0;
         font-size: 2.1rem;
+    }
+    .educationTitles {
+        max-width: 50vw;
     }
 }
 
-@media screen and (max-width: 1104px){
+@media screen and (max-width: 1390px){
     #whatIAm{
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
     #iAm{
-        margin: 9px 0 0 0;
+        margin: 9px 0 0;
         font-size: 1.7rem;
     }
 }
 
-@media screen and (max-width: 966px){
+@media screen and (max-width: 1260px){
     #whatIAm{
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
     #iAm{
         margin: 4px 0 0;
     }
 }
 
-@media screen and (max-width: 830px){
-    #whatIAm{
-        font-size: 1.5rem;
-    }
-    #iAm{
-        margin: 0;
-        font-size: 1.5rem;
-    }
-}
-
-@media screen and (max-width: 694px){
+@media screen and (max-width: 1120px){
     #whatIAm{
         font-size: 2rem;
     }
     #iAm{
-        margin: 1px 0 0 0;
-        font-size: 1rem;
+        font-size: 1.3rem;
+    }
+    #sidebar{
+        position: absolute;
+        background-color: rgba(150, 150, 150, 0.7);
+    }
+    .mainContent{
+        margin-left: 0px;
+    }
+    .marquee {
+        width: 80%;
+    }
+    .item{
+        width: 60px;
+        height: 60px;
+        left: max(calc(80px * 10), 80%);
+    }
+    .marqueeItems{
+        height: 70%;
+    }    
+}
+
+@media screen and (max-width: 980px){
+    #whatIAm{
+        font-size: 1.7rem;
     }
 }
 
-@media screen and (max-width: 552px){
+@media screen and (max-width: 900px){
     #whatIAm{
         font-size: 1.5rem;
     }
     #iAm{
-        margin: 0 0 0 0;
-        font-size: 1.9rem;
-    }
-}
-/* horrible looking media queries end for annoying top part */
-
-
-@media only screen and (max-width: 1200px) {
-    .educationTitles {
-        max-width: 50vw;
+        margin: 1px 0 0 0;
+        font-size: 1.4rem;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media screen and (max-width: 840px){
+    #whatIAm{
+        font-size: 1.3rem;
+    }
+    #iAm{
+        margin: 1px 0 0 0;
+        font-size: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 770px) {
     #AboutMeText, .QualText, .projText, #contactText, .educationTitles {
         max-width: 85vw;
     }
 
-    #arrowForCarouselRight{
+    .marquee {
+        width: 100%;
+    }
+
+    #arrowForCarouselRight, #arrowForCarouselLeft{
         width: 25px;
         height: 25px;
         border-width: 0 3px 3px 0;
@@ -553,7 +633,7 @@ body{
 }
 
 @media only screen and (max-width: 440px){
-    #arrowForCarouselRight{
+    #arrowForCarouselRight, #arrowForCarouselLeft{
         width: 15px;
         height: 15px;
     }

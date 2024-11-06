@@ -1,9 +1,11 @@
 
-// mobi detection (future me is not sure what this is for but don't delete) -----------
+import { Gradient } from "./Gradient.js"
 
-// if (/Mobi|Android|iPhone|Mobile/i.test(navigator.userAgent)) {
-// } else {
-// }
+// Create your instance
+const gradient = new Gradient();
+
+// Call `initGradient` with the selector to your canvas
+gradient.initGradient('#gradient-canvas');
 
 // For hover effect of the sidebar ----------------------------------------------------
 
@@ -14,7 +16,7 @@ sidebarItems.forEach(item => {
         // hides all other items
         sidebarItems.forEach(otherItem => {
             if (otherItem !== item) {
-                otherItem.style.opacity = '0.1';
+                otherItem.style.opacity = '0.2';
             }
         });
         // increase font size of hovered item
@@ -55,39 +57,45 @@ let sidebarVisible = true;
 // gets the arrows and starts the open arrow as hidden
 const arrowForSidebarOpen = document.querySelector('#arrowForSidebarOpen');
 const arrowForSidebarClose = document.querySelector('#arrowForSidebarClose');
-// arrowForSidebarOpen.classList.add('hidden');
+const sidebar = document.querySelector('#sidebar');
+const mainContent = document.querySelector('.mainContent');
+sidebar.classList.add('hidden');
+mainContent.classList.add('centerProperly');
 
 arrowForSidebarClose.addEventListener("click", function() {
     sidebarVisible = !sidebarVisible;
-    const sidebar = document.querySelector('#sidebar');
-    const mainContent = document.querySelector('.mainContent');
     
     if (!sidebarVisible) {
         //hide sidebar
         sidebar.classList.add('hidden');
         mainContent.classList.add('centerProperly');
         arrowForSidebarOpen.classList.remove('hidden');
-        arrowForSidebarClose.style.borderColor = '#e9e9e9';
-        arrowForSidebarClose.style.transform = 'rotate(-45deg)';
-        console.log('test');
+        arrowForSidebarClose.classList.add('hidden');
+        arrowForSidebarClose.style.borderColor = 'var(--secondaryColour)';
+        // arrowForSidebarClose.style.transform = 'rotate(-45deg)';
     }
 });
 
 arrowForSidebarOpen.addEventListener("click", function() {
     sidebarVisible = !sidebarVisible;
-    const sidebar = document.querySelector('#sidebar');
-    const mainContent = document.querySelector('.mainContent');
 
     if (sidebarVisible) {
         // unhide sidebar
         sidebar.classList.remove('hidden');
         mainContent.classList.remove('centerProperly');
-        setTimeout(function(){
-            arrowForSidebarOpen.classList.add('hidden');
-            arrowForSidebarClose.style.borderColor = '#0c0c0c';
-            arrowForSidebarClose.style.transform = 'rotate(135deg)';
-        }, 200);
+        // setTimeout(function(){
+        arrowForSidebarOpen.classList.add('hidden');
+        arrowForSidebarClose.classList.remove('hidden');
+        arrowForSidebarClose.style.borderColor = 'var(--secondaryColour)';
+        // arrowForSidebarClose.style.transform = 'rotate(135deg)';
+        // }, 200);
     }
+});
+
+
+window.addEventListener('scroll', () => {
+    // Update the element's position based on scroll position
+    sidebar.style.top = `${window.scrollY + 25}px`; // Keeps 20px from top of viewport
 });
 
 
@@ -224,36 +232,3 @@ rightArrowChecker.addEventListener('mouseup', function() {
 
 // Initial setup: update grid positions for the first time
 updateGridPositions();
-
-
-// 3d parallax (don't delete I may use in future) ------------------------------------
-
-//  Middle picture ----
-
-// const imageElements = document.getElementById('image2');
-
-// imageElements.addEventListener('mousemove', function(event) {
-//     rotateElement(event, imageElements);
-// });
-
-// imageElements.addEventListener('mouseleave', function(element){
-//     imageElements.style.transform = `rotateX(0deg) rotateY(0deg)`;
-// });
-
-// function rotateElement(event, element) {
-//     // Get mouse position
-//     const x = event.clientX;
-//     const y = event.clientY;
-
-//     // Get the element's bounding box
-//     const rect = element.getBoundingClientRect();
-//     const middleX = rect.left + rect.width / 2;
-//     const middleY = rect.top + rect.height / 2;
-
-//     // Calculate offsets relative to the image
-//     const offsetX = ((x - middleX) / (rect.width / 2)) * 15; // Adjust multiplier for less tilt
-//     const offsetY = ((y - middleY) / (rect.height / 2)) * 15; // Adjust multiplier for less tilt
-
-//     // Set rotation
-//     element.style.transform = `rotateX(${offsetY}deg) rotateY(${offsetX}deg)`;
-// }
