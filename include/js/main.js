@@ -7,6 +7,8 @@ const gradient = new Gradient();
 // Call `initGradient` with the selector to your canvas
 gradient.initGradient('#gradient-canvas');
 
+gradient.connect();
+
 // For hover effect of the sidebar ----------------------------------------------------
 
 const sidebarItems = document.querySelectorAll('.sidebarItemsClass');
@@ -32,7 +34,6 @@ sidebarItems.forEach(item => {
     });
 });
 
-
 function adjustSidebarPosition() {
     const sidebar = document.getElementById('sidebar');
     const windowHeight = window.innerHeight;
@@ -54,49 +55,81 @@ window.addEventListener('resize', adjustSidebarPosition);
 // For moving the sidebar ------------------------------------------------------------
 
 let sidebarVisible = true;
-// gets the arrows and starts the open arrow as hidden
-const arrowForSidebarOpen = document.querySelector('#arrowForSidebarOpen');
-const arrowForSidebarClose = document.querySelector('#arrowForSidebarClose');
+
 const sidebar = document.querySelector('#sidebar');
 const mainContent = document.querySelector('.mainContent');
-sidebar.classList.add('hidden');
-mainContent.classList.add('centerProperly');
+const arrowOpen = document.querySelector('.arrowOpen');
+const arrowClose = document.querySelector('.arrowClose');
 
-arrowForSidebarClose.addEventListener("click", function() {
-    sidebarVisible = !sidebarVisible;
-    
-    if (!sidebarVisible) {
-        //hide sidebar
+const mediaQuery = window.matchMedia('(min-width: 1900px)');
+
+function handleMouseMove(event) {
+    const thresholdIn = 100;
+    const thresholdOut = 425;
+
+    if (event.clientX <= thresholdIn) {
         sidebar.classList.add('hidden');
         mainContent.classList.add('centerProperly');
-        arrowForSidebarOpen.classList.remove('hidden');
-        arrowForSidebarClose.classList.add('hidden');
-        arrowForSidebarClose.style.borderColor = 'var(--secondaryColour)';
-        // arrowForSidebarClose.style.transform = 'rotate(-45deg)';
     }
-});
-
-arrowForSidebarOpen.addEventListener("click", function() {
-    sidebarVisible = !sidebarVisible;
-
-    if (sidebarVisible) {
-        // unhide sidebar
+    else if (event.clientX > thresholdOut) {
         sidebar.classList.remove('hidden');
         mainContent.classList.remove('centerProperly');
-        // setTimeout(function(){
-        arrowForSidebarOpen.classList.add('hidden');
-        arrowForSidebarClose.classList.remove('hidden');
-        arrowForSidebarClose.style.borderColor = 'var(--secondaryColour)';
-        // arrowForSidebarClose.style.transform = 'rotate(135deg)';
-        // }, 200);
     }
-});
+}
 
+function handleScroll() {
+    sidebar.style.top = `${window.scrollY + 25}px`;
+}
 
-window.addEventListener('scroll', () => {
-    // Update the element's position based on scroll position
-    sidebar.style.top = `${window.scrollY + 25}px`; // Keeps 20px from top of viewport
-});
+// media query
+function updateEventListeners() {
+    if (mediaQuery.matches) {
+        sidebar.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('scroll', handleScroll);
+        arrowClose.classList.add('hidden');
+        arrowOpen.classList.add('hidden');
+    }
+    else {
+        sidebar.style.backgroundColor = 'rgba(150, 150, 150, 0.5)';
+        window.removeEventListener('mousemove', handleMouseMove);
+        
+        arrowClose.addEventListener("click", function() {
+            sidebarVisible = !sidebarVisible;
+            if (sidebarVisible) {
+                //hide sidebar
+                sidebar.classList.remove('hidden');
+                mainContent.classList.remove('centerProperly');
+                setTimeout(function(){
+                    arrowOpen.classList.remove('hidden');
+                    arrowClose.classList.add('hidden');
+                    arrowClose.style.borderColor = 'var(--secondaryColour)';
+                }, 400);
+            }
+        });
+        
+        arrowOpen.addEventListener("click", function() {
+            sidebarVisible = !sidebarVisible;
+        
+            if (!sidebarVisible) {
+                // unhide sidebar
+                sidebar.classList.add('hidden');
+                
+                setTimeout(function(){
+                    arrowOpen.classList.add('hidden');
+                    arrowClose.classList.remove('hidden');
+                    arrowClose.style.borderColor = 'var(--secondaryColour)';
+                }, 100);
+            }
+        });
+    }
+}
+
+// setup
+// handleArrows();
+updateEventListeners();
+mediaQuery.addEventListener('change', updateEventListeners);
+
 
 
 // Changing text at the top ----------------------------------------------------------------------------------------------------
@@ -122,6 +155,7 @@ function cycleText() {
     currentTextIndex = (currentTextIndex + 1) % TextArray.length;
 }
 
+cycleText();
 setInterval(cycleText, 1000);
 
 

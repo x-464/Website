@@ -15,6 +15,8 @@ return [(hexCode >> 16 & 255) / 255, (hexCode >> 8 & 255) / 255, (255 & hexCode)
 [t]: n
 }), {});
 
+
+
 //Essential functionality of WebGl
 //t = width
 //n = height
@@ -325,6 +327,9 @@ updateGradientColors(newColors) {
     console.log('Updating gradient colors to:', newColors);
     this.sectionColors = newColors.map(normalizeColor);
     this.initMaterial(); // Reinitialize materials with new colors
+    this.uniforms.u_waveLayers.value.forEach((layer, i) => {
+        layer.value.color.value = this.sectionColors[i + 1];
+    });
     this.minigl.render(); // Re-render the gradient
 }
 async connect() {
@@ -431,6 +436,7 @@ initMaterial() {
             excludeFrom: "fragment",
             type: "array"
         })
+
     };
     for (let e = 1; e < this.sectionColors.length; e += 1) this.uniforms.u_waveLayers.value.push(new this.minigl.Uniform({
         value: {

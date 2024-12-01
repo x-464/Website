@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script type="module" src="main.js"></script> -->
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollSmoother.min.js"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script> -->
+    <script type="module" src="./include/js/main.js"></script>
+    <link rel="stylesheet" href="./include/css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Libre+Baskerville&display=swap" rel="stylesheet">
+
     <title>Felix's Portfolio</title>
 </head>
 <body>
+    <div class="arrowForSidebar arrowOpen"></div>
     <div id="sidebar" aria-hidden="true">
-        <div id="arrowForSidebarClose"></div>
+        <div class="arrowForSidebar arrowClose"></div>
         <a href="#aboutme" id="sidebar1" class="sidebarItemsClass">About me</a>
         <a href="#education" id="sidebar2" class="sidebarItemsClass">Education</a>
         <a href="#projects" id="sidebar3" class="sidebarItemsClass">Projects</a>
         <a href="#contactMe" id="sidebar4" class="sidebarItemsClass">Contact me</a>
-        <a href="CV/Felix Hornby's CV.pdf" download id="CV"> Want my CV?</a>
+        <a href="./include/CV/Felix Hornby's CV.pdf" download id="CV"> Want my CV?</a>
     </div>
-    <div id="arrowForSidebarOpen" aria-hidden="true"></div>
     <div class="mainContent">
         <div aria-hidden="true" class="top sections">
             <h1 id="myName">Hey! I'm Felix.</h1>
-            <h2 id="iAm">I'm a &nbsp;</h2>
+            <h4 id="iAm">I'm a &nbsp;</h4>
             <div id="whatIAm">
                 <div id="Stu"  class="itemsInWhatIAm">STUDENT</div>
                 <div id="GD" class="itemsInWhatIAm">GRAPHIC DESIGNER</div>
@@ -49,69 +50,72 @@
                 Beyond programming, I enjoy snowboarding, climbing, and biking! I also love camera work, video editing, and 3D modeling.
             </p>
             
-            <p id="iCan">I can use:</p>
+            <h3 id="iCan">I can use:</h3>
             <div class="marquee">
-                <div class="item item1" style="--n: 1"><img class="marqueeItems" src="images/Marquee SVGs/c++.svg" alt="C++"></div>
-                <div class="item item2" style="--n: 2"><img class="marqueeItems" src="images/Marquee SVGs/python.svg" alt="Python"></div>
-                <div class="item item3" style="--n: 3"><img class="marqueeItems" src="images/Marquee SVGs/html.svg" alt="HTML"></div>
-                <div class="item item4" style="--n: 4"><img class="marqueeItems" src="images/Marquee SVGs/css.svg" alt="CSS"></div>
-                <div class="item item5" style="--n: 5"><img class="marqueeItems" src="images/Marquee SVGs/javascript.svg" alt="JavaScript"></div>
-                <div class="item item6" style="--n: 6"><img class="marqueeItems" src="images/Marquee SVGs/threejs.svg" alt="Three.js"></div>
-                <div class="item item7" style="--n: 7"><img class="marqueeItems" src="images/Marquee SVGs/afterEffects.svg" alt="After Effects"></div>
-                <div class="item item8" style="--n: 8"><img class="marqueeItems" src="images/Marquee SVGs/adobePhotoshop.svg" alt="Photoshop"></div>
-                <div class="item item9" style="--n: 9"><img class="marqueeItems" src="images/Marquee SVGs/premierePro.svg" alt="Premiere Pro"></div>
-                <div class="item item10" style="--n: 10"><img class="marqueeItems" src="images/Marquee SVGs/blender.svg" alt="Blender"></div>
+                <div class="item item1" style="--n: 1"> <img class="marqueeItems" src="./include/images/Marquee SVGs/c++.svg" alt="C++"> </div>
+                <div class="item item2" style="--n: 2"> <img class="marqueeItems" src="./include/images/Marquee SVGs/python.svg" alt="Python"> </div>
+                <div class="item item3" style="--n: 3"> <img class="marqueeItems" src="./include/images/Marquee SVGs/html.svg" alt="HTML"> </div>
+                <div class="item item4" style="--n: 4"> <img class="marqueeItems" src="./include/images/Marquee SVGs/css.svg" alt="CSS"> </div>
+                <div class="item item5" style="--n: 5"> <img class="marqueeItems" src="./include/images/Marquee SVGs/javascript.svg" alt="JavaScript"> </div>
+                <div class="item item6" style="--n: 6"> <img class="marqueeItems" src="./include/images/Marquee SVGs/threejs.svg" alt="Three.js"> </div>
+                <div class="item item7" style="--n: 7"> <img class="marqueeItems" src="./include/images/Marquee SVGs/afterEffects.svg" alt="After Effects"> </div>
+                <div class="item item8" style="--n: 8"> <img class="marqueeItems" src="./include/images/Marquee SVGs/adobePhotoshop.svg" alt="Photoshop"> </div>
+                <div class="item item9" style="--n: 9"> <img class="marqueeItems" src="./include/images/Marquee SVGs/premierePro.svg" alt="Premiere Pro"> </div>
+                <div class="item item10" style="--n: 10"> <img class="marqueeItems" src="./include/images/Marquee SVGs/blender.svg" alt="Blender"> </div>
             </div>
         </div>
         
-        <div id="education" class="education sections">
-            <h1 id="educationTitle" class="MainContent">Education</h1>
+        <div id="education" class="sections">
+            <h2 class="MainContent">Education</h2>
             <div id="educationText">
-
-                <h2 class="educationTitles">Short Course in Digital Filmmaking at Arts University Bournemouth</h2>
+                <h3>Short Course in Digital Filmmaking at Arts University Bournemouth</h3>
                 <p id="cAubText" class="QualText">
                     This course allowed me to explore the fundamentals of digital filmmaking, from pre-production through post-production, 
                     increasing my understanding of storytelling and media creation.
                 </p>
 
-                <h2 class="educationTitles"><br>My GCSEs</h2>
-                <div id="GCSEsList">English - Grade 7<br>Computer Science - Grade 6<br>Maths - Grade 5</div>
+                <h3><br>My GCSEs</h3>
+                <h5>
+                    English - Grade 7
+                    <br>Computer Science - Grade 6
+                    <br>Maths - Grade 5
+                </h5>
 
-                <h2 class="educationTitles"><br>Level 2 Media Production & Technologies at Bournemouth & Poole College</h2>
-                <div id="L2MGrade">Grade: Distinction</div>
+                <h3><br>Level 2 Media Production & Technologies at Bournemouth & Poole College</h3>
+                <h5>Grade: Distinction</h5>
                 <p id="L2MText" class="QualText">
-                This qualification provided me with skills in media production, including video/image editing using the Adobe Suite, 
-                camera work using the Canon XA75, and an understanding of media technologies.</p>
-
-                <h2 class="educationTitles"><br>T Level in Digital Production, Design & Development at Bournemouth & Poole College</h2>
-                <p id="DPDD" class="QualText">
-                    I am currently studying to improve my skills in programming and software development, as well as explore cybersecurity, 
-                    data analysis, legal and ethical responsibilities, and professional responsibilities. This course combines both theoretical and 
-                    practical elements, preparing me for a career in anything digital.
+                    This qualification provided me with skills in media production, including video/image editing using the Adobe Suite, 
+                    camera work using the Canon XA75, and an understanding of media technologies.
                 </p>
 
+                <h3><br>T Level in Digital Production, Design & Development at Bournemouth & Poole College</h3>
+                <p id="DPDD" class="QualText">
+                    I am currently studying to improve my skills in programming and software development, as well as explore cybersecurity, 
+                    data analysis, and my legal, ethical and professional responsibilities. This course combines both theoretical and 
+                    practical elements, preparing me for many career paths.
+                </p>
             </div>
         </div>
 
-        <div id="projects" class="projects sections">
-            <h1 id="projectsTitle">My Projects</h1>
-            <h2 id="modelOpenerTitle"><br>Model Opener for .obj Files</h2>
+        <div id="projects" class="sections">
+            <h2 id="projectsTitle">My Projects</h2>
+            <h3 id="modelOpenerTitle">Model Opener for .obj Files</h3>
             <p class="projText">This project has been in the making for about 6 months and counting now. During this time I've learnt to use OpenGL in C++. 
                 Within OpenGL I've had to learn how to make shaders and create realistic lighting / shadows from the ground up.  
                 It also features .obj file reading so you can import any file with the .obj file extension.
             </p>
             <br>    
             <div id="modelOpenerImages">
-                <img aria-hidden="true" src="images/Project IMGs/ModelOpener/placeholder1.png" alt="Placeholder Images" id="image1" class="teapotImg">
-                <img aria-hidden="true" src="images/Project IMGs/ModelOpener/placeholder2.png" alt="Placeholder Images" id="image2" class="teapotImg">
-                <img aria-hidden="true" src="images/Project IMGs/ModelOpener/placeholder3.png" alt="Placeholder Images" id="image3" class="teapotImg">
+                <img aria-hidden="true" src="./include/images/Project IMGs/ModelOpener/placeholder1.png" alt="Placeholder Images" id="image1" class="teapotImg">
+                <img aria-hidden="true" src="./include/images/Project IMGs/ModelOpener/placeholder2.png" alt="Placeholder Images" id="image2" class="teapotImg">
+                <img aria-hidden="true" src="./include/images/Project IMGs/ModelOpener/placeholder3.png" alt="Placeholder Images" id="image3" class="teapotImg">
                 <div aria-hidden="true" class="arrowMovement" id="arrowForCarouselLeft"></div>
                 <div aria-hidden="true" class="arrowMovement" id="arrowForCarouselRight"></div>
             </div>
-            <p id="construction">Still under construction (sorry), come back soon!</p>
+            <div id="construction">Still under construction (sorry), come back soon!</>
         </div>
         <div id="contactMe" class="contactMe sections">
-            <h1 id="contactTitle">Contact Me</h1>
+            <h2 id="contactTitle">Contact Me</h2>
             <div id="contactInfoDiv">
                 <a href="mailto:felixhornby64@outlook.com" id="myEmail" class="contactInfo">Email&nbsp;&nbsp;</a>
                 <a href="https://www.linkedin.com/in/felix-hornby-09215524b/" target="_blank" id="linkedIn" class="contactInfo">&nbsp;&nbsp;LinkedIn</a>
@@ -120,8 +124,5 @@
         
     </div>
     <canvas id="gradient-canvas" data-transition-in />
-
-    <script src="GSAP/gsap.min.js"></script>
-    <script type="module" src="main.js"></script>
 </body>
 </html>
